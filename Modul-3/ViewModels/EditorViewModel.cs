@@ -1,4 +1,4 @@
-﻿using Modul_3.Models;
+using Modul_3.Models;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -199,7 +199,7 @@ namespace Modul_3.ViewModels
                         ContactTag = contact.Value,
                         RelativeX = 0.1,
                         RelativeY = 0.1,
-                        Diameter = 30
+                        Diameter = 56
                     });
                 }
             }
@@ -213,7 +213,7 @@ namespace Modul_3.ViewModels
                 ContactTag = $"Бирка_{GetNextContactNumber()}",
                 RelativeX = 0.5,
                 RelativeY = 0.5,
-                Diameter = 30
+                Diameter = 35
             };
 
             Markers.Add(newMarker);
