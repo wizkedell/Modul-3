@@ -29,11 +29,6 @@ namespace Modul_3
         {
             _execute();
         }
-
-        // Метод для принудительного обновления состояния команды
-        public void RaiseCanExecuteChanged()
-        {
-            CommandManager.InvalidateRequerySuggested();
-        }
+               
     }
 }
