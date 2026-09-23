@@ -1,22 +1,32 @@
-﻿using System;
-using System.ComponentModel;
+
+using System;
+
 using System.IO.Ports;
-using System.Runtime.CompilerServices;
+using System.Linq;
+
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace Modul_3.Services
 {
-    public class ArduinoService : INotifyPropertyChanged, IDisposable
+    public class ArduinoService : IDisposable
     {
         private SerialPort _serialPort;
         private CancellationTokenSource _cancellationTokenSource;
         private bool _isConnected;
 
+      //  private int nC; // Задел на динамическое определение 
+
+        //private ContactMarker _contactMarker; //То, по чему будет определяться динамическое определение. Масло масляное л ляляляляля
+
         public event Action<bool[]> ContactsStateChanged;
         public event Action<string> MessageReceived;
-        public event PropertyChangedEventHandler PropertyChanged;
 
+        
+
+        private readonly StringBuilder _pendingBuffer = new StringBuilder();
 
         public void Dispose()
         {
@@ -34,52 +44,55 @@ namespace Modul_3.Services
             }
         }
 
-        public bool IsConnected
-        {
-            get => _isConnected;
-            private set
-            {
-                if (_isConnected != value)
-                {
-                    _isConnected = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        public bool IsConnected => _isConnected;
 
         public string[] AvailablePorts => SerialPort.GetPortNames();
-
+        //Подключение и автоматический поиск порта
         public async Task<bool> ConnectAsync(string portName)
         {
             try
             {
                 Disconnect();
-
-                _serialPort = new SerialPort(portName, 115200)
+                _serialPort = new SerialPort(portName, 57600)
                 {
                     ReadTimeout = 1000,
-                    WriteTimeout = 1000
+                    WriteTimeout = 1000,
+                    DtrEnable = true,   
                 };
 
                 _serialPort.Open();
-                IsConnected = true;
+                _serialPort.DiscardInBuffer(); 
 
-                // Ждем инициализации Arduino
+                _isConnected = true;
+                
+
                 await Task.Delay(2000);
 
-                // Запускаем чтение данных
                 _cancellationTokenSource = new CancellationTokenSource();
                 _ = Task.Run(() => ReadDataAsync(_cancellationTokenSource.Token));
-
-                // Запускаем непрерывный опрос
-                StartContinuousReading();
-
-                return true;
+                _serialPort.Write("puk:0");
+                var nado = _serialPort.ReadLine();
+                if (!string.IsNullOrEmpty(nado))
+                {
+                    if (nado.StartsWith("kak:1"))
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+                
             }
             catch (Exception ex)
             {
                 MessageReceived?.Invoke($"Connection error: {ex.Message}");
-                IsConnected = false;
+                _isConnected = false;
                 return false;
             }
         }
@@ -96,81 +109,108 @@ namespace Modul_3.Services
 
             _serialPort?.Dispose();
             _serialPort = null;
-            IsConnected = false;
+            _isConnected = false;
         }
 
-        public void StartContinuousReading()
+        public void StartContinuousReading(string command = "rpn:12")
         {
+      ////      if (IsConnected && (product_name=="Ш5"|| product_name == "Ш6"))
+      //      {                
+      //           _serialPort?.WriteLine("tr:37"); //  $"Start_ {_contactMarker.ContactNumber.ToString()}" (Для динамической подстройки)
+      //      }
             if (IsConnected)
             {
-                _serialPort?.WriteLine("11"); // Команда непрерывного опроса
+                MessageReceived?.Invoke($"Message incoming{command}");
+                _serialPort?.WriteLine(command); //  $"Start_ {_contactMarker.ContactNumber.ToString()}" (Для динамической подстройки)
             }
         }
+        //Очистка буфера для обработки дефектов
+        public void DiscardBuffers()
+        {
+            if (_serialPort?.IsOpen == true)
+            {
+                _serialPort.DiscardInBuffer();
+                _serialPort.DiscardOutBuffer();
+            }
+        }
+
+
 
         public void StopContinuousReading()
         {
             if (IsConnected)
             {
-                _serialPort?.WriteLine("13"); // Команда сброса (выключает непрерывный опрос)
+                _serialPort?.WriteLine(" ");
             }
         }
-
+        //Чтение полученной информации.
         private async Task ReadDataAsync(CancellationToken cancellationToken)
         {
             while (!cancellationToken.IsCancellationRequested && _serialPort?.IsOpen == true)
             {
                 try
                 {
-                    string data = _serialPort.ReadLine().Trim();
-                    MessageReceived?.Invoke($"Received: {data}");
+                    int bytesToRead = _serialPort.BytesToRead;
+                    if (bytesToRead > 0)
+                    {
+                        byte[] buffer = new byte[bytesToRead];
+                        _serialPort.Read(buffer, 0, bytesToRead);
+                        string chunk = Encoding.ASCII.GetString(buffer);
 
-                    ProcessReceivedData(data);
-                }
-                catch (TimeoutException)
-                {
-                    // Игнорируем таймауты - это нормально
+                        _pendingBuffer.Append(chunk);
+
+                        string full = _pendingBuffer.ToString();
+                        int newlineIndex;
+                        while ((newlineIndex = full.IndexOf('\n')) >= 0)
+                        {
+                            string line = full.Substring(0, newlineIndex).Trim();
+                            _pendingBuffer.Remove(0, newlineIndex + 1);
+
+                            if (!string.IsNullOrEmpty(line))
+                                ProcessReceivedData(line);
+
+                            full = _pendingBuffer.ToString();
+                        }
+                    }
+                    else
+                    {
+                        await Task.Delay(10, cancellationToken);
+                    }
                 }
                 catch (Exception ex)
                 {
                     MessageReceived?.Invoke($"Read error: {ex.Message}");
                     break;
                 }
-
-                await Task.Delay(10);
             }
         }
-
-        private void ProcessReceivedData(string data)
+        public void ClearPendingBuffer()
         {
-            if (data.StartsWith("STATUS:"))
-            {
-                // Формат: STATUS:1,0,1,0,0,0,0,0,0,0
-                string statesString = data.Substring(7);
-                string[] stateValues = statesString.Split(',');
-
-                if (stateValues.Length == 10)
-                {
-                    bool[] states = new bool[10];
-                    for (int i = 0; i < 10; i++)
-                    {
-                        // INPUT_PULLUP: 0 = замкнут, 1 = разомкнут
-                        // Преобразуем: true = контакт замкнут, false = разомкнут
-                        states[i] = stateValues[i] == "0";
-                    }
-
-                    ContactsStateChanged?.Invoke(states);
-                }
-            }
-            else if (data.StartsWith("PIN"))
-            {
-                // Формат: PIN0:1 или PIN5:0
-                // Можно обработать при необходимости
-            }
+            lock (_pendingBuffer) { _pendingBuffer.Clear(); }
+            DiscardBuffers();
         }
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //Обработка полученного значения
+        private void ProcessReceivedData(string data) //Для обработки уничерсального сообщения (и 10 и 35), разобраться потом!!!!
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            data = data.Trim();
+            if (string.IsNullOrEmpty(data)) return;
+
+            string[] stateValues;
+            if (data.Contains(' '))
+                stateValues = data.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            else
+                stateValues = data.Select(c => c.ToString()).ToArray();
+
+            // Обрабатываем любую длину, если все символы 0 или 1
+            if (stateValues.Length > 0 && stateValues.All(c => c == "0" || c == "1"))
+            {
+                bool[] states = stateValues.Select(c => c == "0").ToArray();
+                ContactsStateChanged?.Invoke(states);
+            }
         }
+        //else if (data.StartsWith("PIN"))
+        //{
+        //    // Обработка отдельных пинов
+        //}
     }
-}
+    }
