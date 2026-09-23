@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
@@ -20,7 +20,7 @@ namespace Modul_3.Converters
         {
             throw new NotImplementedException();
         }
-    }
+    }    
 
     public class SelectedMarkerConverter : IValueConverter
     {
@@ -39,7 +39,7 @@ namespace Modul_3.Converters
                         new Setter(System.Windows.Shapes.Ellipse.FillProperty, new SolidColorBrush(Colors.Orange)),
                         new Setter(System.Windows.Shapes.Ellipse.StrokeProperty, new SolidColorBrush(Colors.Red)),
                         new Setter(System.Windows.Shapes.Ellipse.StrokeThicknessProperty, 3.0),
-                        new Setter(System.Windows.Shapes.Ellipse.OpacityProperty, 0.7),
+                       // new Setter(System.Windows.Shapes.Ellipse.OpacityProperty, 0.1),
                         new Setter(System.Windows.Shapes.Ellipse.CursorProperty, System.Windows.Input.Cursors.Hand)
                     }
                 };
@@ -56,7 +56,7 @@ namespace Modul_3.Converters
                         new Setter(System.Windows.Shapes.Ellipse.FillProperty, new SolidColorBrush(Colors.Green)),
                         new Setter(System.Windows.Shapes.Ellipse.StrokeProperty, new SolidColorBrush(Colors.White)),
                         new Setter(System.Windows.Shapes.Ellipse.StrokeThicknessProperty, 2.0),
-                        new Setter(System.Windows.Shapes.Ellipse.OpacityProperty, 0.7),
+                       // new Setter(System.Windows.Shapes.Ellipse.OpacityProperty, 0.1),
                         new Setter(System.Windows.Shapes.Ellipse.CursorProperty, System.Windows.Input.Cursors.Hand)
                     }
                 };
