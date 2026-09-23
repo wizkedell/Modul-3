@@ -1,18 +1,24 @@
-﻿using System.ComponentModel;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
 
 namespace Modul_3.Models
 {
     public class ContactMarker : INotifyPropertyChanged
     {
-        private int _contactNumber;
+        public int _contactNumber;
         private string _contactTag;
         private bool _isSelected;
         private double _relativeX;
         private double _relativeY;
         private double _diameter = 30;
         private bool _isActive;
+
+        private int _activatedSegments;
+        private int _totalSegments = 1;
+        private int _activationDelay = 500;
+
+        public List<int> LinkedContacts { get; set; } = new List<int>();
 
 
         public bool IsActive
@@ -27,6 +33,47 @@ namespace Modul_3.Models
                 }
             }
         }
+
+
+        public int ActivatedSegments
+        {
+            get => _activatedSegments;
+            set
+            {
+                if (_activatedSegments != value)
+                {
+                    _activatedSegments = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int TotalSegments
+        {
+            get => _totalSegments;
+            set
+            {
+                if (_totalSegments != value)
+                {
+                    _totalSegments = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public int ActivationDelay
+        {
+            get => _activationDelay;
+            set
+            {
+                if (_activationDelay != value)
+                {
+                    _activationDelay = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
 
         public int ContactNumber
         {
@@ -50,9 +97,25 @@ namespace Modul_3.Models
                 {
                     _contactTag = value;
                     OnPropertyChanged();
+                    UpdateSegmentsFromTag();
                 }
             }
         }
+
+        private void UpdateSegmentsFromTag()
+        {
+            if (string.IsNullOrEmpty(_contactTag) || _contactTag.ToUpper() == "ПУСТО")
+            {
+                TotalSegments = 1;
+            }
+            else
+            {
+                // Считаем количество сегментов по количеству запятых + 1
+                var segments = _contactTag.Split(',').Length;
+                TotalSegments = segments;
+            }
+        }
+
 
         public bool IsSelected
         {
