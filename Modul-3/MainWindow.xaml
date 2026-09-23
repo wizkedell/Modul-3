@@ -1,4 +1,4 @@
-﻿<Window x:Class="Modul_3.MainWindow"
+<Window x:Class="Modul_3.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Modul-1 - Система тестирования разъемов" 
@@ -37,6 +37,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
@@ -86,32 +87,63 @@
                           ItemsSource="{Binding Operators}"
                           SelectedItem="{Binding SelectedOperator}"/>
             </Grid>
+            
         </StackPanel>
 
         <!-- Кнопки -->
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0">
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,20,0,0" Width="400">
             <Button Content="Старт" 
                     Command="{Binding StartCommand}"
-                    Background="#FF4CAF50" 
-                    Foreground="White" 
+                    Background="LightGreen"
+                    Foreground="Black"
                     FontWeight="Bold">
-                <Button.Style>
-                    <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-                        <Style.Triggers>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Background" Value="LightGray"/>
-                                <Setter Property="Foreground" Value="DarkGray"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </Button.Style>
             </Button>
+            <Button Content="Продолжить" 
+                    Command="{Binding ResumeSessionCommand}"
+                    Background="#FF6CB4B9" 
+                    Foreground="Black" 
+                    FontWeight="Bold"/>
+                    
 
             <Button Content="Редактор" 
                     Command="{Binding EditorCommand}"
                     Background="#FF2196F3" 
-                    Foreground="White" 
+                    Foreground="Black" 
                     FontWeight="Bold"/>
+            
         </StackPanel>
+
+        <!-- Статусная строка -->
+        <StatusBar Grid.Row="3" Margin="0,10,0,0">
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Модуль-1:" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding ArduinoStatus}" Margin="5,0,0,0">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding ArduinoStatus}" Value="Подключено">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ArduinoStatus}" Value="Ошибка подключения">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ArduinoStatus}" Value="Модуль-1 не найден">
+                                        <Setter Property="Foreground" Value="Red"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ArduinoStatus}" Value="Поиск Модуль-1...">
+                                        <Setter Property="Foreground" Value="Orange"/>
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding ArduinoStatus}" Value="Готов к работе">
+                                        <Setter Property="Foreground" Value="Green"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
     </Grid>
 </Window>
