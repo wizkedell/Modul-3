@@ -1,9 +1,10 @@
-﻿using System;
+using Modul_3.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.Json;
 using System.Text.RegularExpressions;
-using Modul_3.Models;
-
 namespace Modul_3.Services
 {
     public class ProductCatalogLoader
@@ -13,7 +14,7 @@ namespace Modul_3.Services
         public ProductCatalogLoader(string configPath = null)
         {
             // Если путь не указан, используем путь по умолчанию на диске C:
-            _defaultConfigPath = configPath ?? @"C:\Modul3Config\prog.txt";
+            _defaultConfigPath = configPath ?? @"C:\Users\ТЕСТ\Desktop\Modul-3\PROG\prog.txt";
         }
 
         public ProductCatalog LoadCatalog()
@@ -210,6 +211,68 @@ namespace Modul_3.Services
             {
                 System.Diagnostics.Debug.WriteLine($"Не удалось создать тестовую структуру: {ex.Message}");
             }
+        }
+    }
+    
+
+    //Сохранение прогресса
+    public class ProgressService
+    {
+        
+        private static string SessionsFolder =>
+            @"C:\PROG\Sessions";
+
+
+        // Сохранить прогресс в файл.
+
+        public string Save(TestProgress progress)
+        {
+            if (!Directory.Exists(SessionsFolder))
+                Directory.CreateDirectory(SessionsFolder);
+
+            string fileName = $"{progress.ProductName}_{progress.ProductNumber}_" +
+                              $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.json";
+
+            // Убираем недопустимые символы из имени
+            fileName = string.Join("_", fileName.Split(Path.GetInvalidFileNameChars()));
+
+            string path = Path.Combine(SessionsFolder, fileName);
+
+            var options = new JsonSerializerOptions { WriteIndented = true };
+            string json = JsonSerializer.Serialize(progress, options);
+            File.WriteAllText(path, json);
+
+            return path;
+        }
+
+
+        // Загрузить прогресс из файла.
+
+        public TestProgress Load(string path)
+        {
+            if (!File.Exists(path))
+                throw new FileNotFoundException($"Файл сессии не найден: {path}");
+
+            string json = File.ReadAllText(path);
+            var progress = JsonSerializer.Deserialize<TestProgress>(json);
+
+            if (progress == null)
+                throw new InvalidDataException("Файл сессии повреждён");
+
+            return progress;
+        }
+
+
+        // Список всех сохранённых сессий.
+
+        public List<string> GetSavedSessions()
+        {
+            if (!Directory.Exists(SessionsFolder))
+                return new List<string>();
+
+            return Directory.GetFiles(SessionsFolder, "*.json")
+                            .OrderByDescending(File.GetLastWriteTime)
+                            .ToList();
         }
     }
 }
