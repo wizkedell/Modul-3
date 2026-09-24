@@ -55,7 +55,8 @@ namespace Modul_3.Views
                 e.PropertyName == nameof(ContactMarker.RelativeY) ||
                 e.PropertyName == nameof(ContactMarker.Diameter) ||
                 e.PropertyName == nameof(ContactMarker.IsSelected) ||
-                e.PropertyName == nameof(ContactMarker.IsActive))
+                e.PropertyName == nameof(ContactMarker.IsActive) ||
+                e.PropertyName == nameof(ContactMarker.ContactTag))
             {
                 UpdatePositionFromDataContext();
             }

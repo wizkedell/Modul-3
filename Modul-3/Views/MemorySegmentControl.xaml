@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="Modul_3.Views.MemorySegmentControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <!-- Внешнее кольцо памяти (сегменты) -->
+        <Canvas x:Name="SegmentsCanvas"/>
+
+        <!-- Внутренний круг (текущее состояние) -->
+        <Ellipse x:Name="InnerCircle" 
+                  
+                 StrokeThickness="1">
+            <Ellipse.Fill>
+                <SolidColorBrush x:Name="InnerCircleBrush" Color="Red"/>
+            </Ellipse.Fill>
+        </Ellipse>
+    </Grid>
+</UserControl>

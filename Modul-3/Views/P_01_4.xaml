@@ -1,0 +1,727 @@
+﻿<Window x:Class="Modul_2._0.Views.Windows.P_01_4"
+         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:l="clr-namespace:Modul_2._0"
+        xmlns:vm="clr-namespace:Modul_2._0.ViewModels"
+        xmlns:conv="clr-namespace:Modul_2._0.Converters"
+        xmlns:ia="http://schemas.microsoft.com/xaml/behaviors"
+        
+        WindowStartupLocation="CenterScreen"
+  
+        Title="Ш4_П-01" Height="700" Width="900">
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+    </Window.Background>
+
+    <Window.DataContext>
+        <vm:SecondViewModel/>
+    </Window.DataContext>
+
+    <ia:Interaction.Triggers>
+        <ia:EventTrigger EventName="Closing">
+            <ia:InvokeCommandAction Command="{Binding WindowClosing}" PassEventArgsToCommand="True"/>
+        </ia:EventTrigger>
+    </ia:Interaction.Triggers>
+
+
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid ShowGridLines="False" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox Margin="10" ItemsSource="{Binding Module2List}" SelectedIndex="{Binding Module2ListIndex}"/>
+            <TabControl SelectedIndex="{Binding Module2ListIndex}" Grid.Column="1">
+                <TabControl.Background>
+                    <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}"/>
+                </TabControl.Background>
+                <TabItem Header="А" Visibility="Collapsed">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleAListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="A" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="А4.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+
+                                </Grid.RowDefinitions>
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact5, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA5, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA4, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact6, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA6, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact10, Converter={conv:ColorConverters}}" Stroke="{Binding ContactA10, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                </TabItem>
+                <TabItem Header="Б" Visibility="Collapsed" >
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleBListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Б" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="Б4.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact5, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB5, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB4, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact6, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB6, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactB8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact10, Converter={conv:ColorConverters}}"/>
+                                <Path Stroke="{Binding ContactB10, Converter={conv:ColorConverterMemory1}}" StrokeThickness="10.5" Grid.Column="10" Grid.Row="3" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,44.3">
+                                                <ArcSegment Point="24.5,7.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Clockwise" Size="16.4,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path Stroke="{Binding ContactB10, Converter={conv:ColorConverterMemory1A}}" StrokeThickness="10.5" Grid.Column="10" Grid.Row="3" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,44.3">
+                                                <ArcSegment Point="24.5,7.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Counterclockwise" Size="16,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+
+                </TabItem>
+                <TabItem Header="В" Visibility="Collapsed">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleVListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="В" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="В4.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+
+                                </Grid.RowDefinitions>
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact5, Converter={conv:ColorConverters}}"/>
+                                <Path Stroke="{Binding ContactV5, Converter={conv:ColorConverterMemory2}}" StrokeThickness="10.5" Grid.Column="5" Grid.Row="1" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,53.3">
+                                                <ArcSegment Point="24.5,16.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Clockwise" Size="16.4,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path Stroke="{Binding ContactV5, Converter={conv:ColorConverterMemory2A}}" StrokeThickness="10.5" Grid.Column="5" Grid.Row="1" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,53.3">
+                                                <ArcSegment Point="24.5,16.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Counterclockwise" Size="16,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" />
+                                <Path Stroke="{Binding ContactV4, Converter={conv:ColorConverterMemory1}}" StrokeThickness="10.5" Grid.Column="4" Grid.Row="3" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,44.3">
+                                                <ArcSegment Point="24.5,7.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Clockwise" Size="16.4,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path Stroke="{Binding ContactV4, Converter={conv:ColorConverterMemory1A}}" StrokeThickness="10.5" Grid.Column="4" Grid.Row="3" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,44.3">
+                                                <ArcSegment Point="24.5,7.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Counterclockwise" Size="16,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact6, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV6, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact10, Converter={conv:ColorConverters}}" Stroke="{Binding ContactV10, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Г" Visibility="Collapsed">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleGListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Г" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="Г4_П01.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+
+                                </Grid.RowDefinitions>
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact5, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG5, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG4, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact6, Converter={conv:ColorConverters}}"/>
+                                <Path Stroke="{Binding ContactG6, Converter={conv:ColorConverterMemory1}}" StrokeThickness="10.5" Grid.Column="6" Grid.Row="3" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,44.3">
+                                                <ArcSegment Point="24.5,7.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Clockwise" Size="16.4,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+                                <Path Stroke="{Binding ContactG6, Converter={conv:ColorConverterMemory1A}}" StrokeThickness="10.5" Grid.Column="6" Grid.Row="3" Panel.ZIndex="2">
+                                    <Path.Data>
+                                        <PathGeometry>
+                                            <PathFigure IsClosed="False"  StartPoint="24.5,44.3">
+                                                <ArcSegment Point="24.5,7.7" IsLargeArc="False" RotationAngle="0" SweepDirection="Counterclockwise" Size="16,16"/>
+                                            </PathFigure>
+                                        </PathGeometry>
+                                    </Path.Data>
+                                </Path>
+
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact10, Converter={conv:ColorConverters}}" Stroke="{Binding ContactG10, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Д" Visibility="Collapsed">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleDListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Д" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="Д4_П01_Е2.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact5, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD5, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="48" Height="48" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD4, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact6, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD6, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="48" Height="48" Fill="{Binding Contact10, Converter={conv:ColorConverters}}" Stroke="{Binding ContactD10, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Е" Visibility="Collapsed">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleEListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="Е" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="Е4.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact5, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE5, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE4, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact6, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE6, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact10, Converter={conv:ColorConverters}}" Stroke="{Binding ContactE10, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="И" Visibility="Collapsed">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleIListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="И" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="И4_П01.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact5, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI5, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI4, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact6, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI6, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact10, Converter={conv:ColorConverters}}" Stroke="{Binding ContactI10, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="К" Visibility="Collapsed">
+                    <Grid ShowGridLines="False">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*">
+                            </RowDefinition>
+                            <RowDefinition Height="30*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" ShowGridLines="False">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+
+                            </Grid.ColumnDefinitions>
+
+                            <TextBox Grid.Column="1" Text="{Binding ModuleLListIndexTab}" Height="130" Width="300" TextAlignment="Center" VerticalContentAlignment="Center" IsReadOnly="True" FontFamily="Microsoft Sans Serif" Foreground="#FF307DDA" FontSize="70"  />
+                        </Grid>
+                        <Grid ShowGridLines="False" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10*"/>
+                                <ColumnDefinition Width="600"/>
+                                <ColumnDefinition Width="12*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="450"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" Content="К" Grid.Column="0" HorizontalAlignment="Center" FontSize="65" />
+
+                            <Image Grid.Column="1"  VerticalAlignment="Center" HorizontalAlignment="Center" Source="К4_П01.gif"/>
+
+                            <Grid ShowGridLines="False" Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="47"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="48"/>
+                                    <ColumnDefinition Width="53"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="120"/>
+                                    <RowDefinition Height="70"/>
+                                    <RowDefinition Height="72"/>
+                                    <RowDefinition Height="52"/>
+                                    <RowDefinition Height="96"/>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition Height="*"/>
+
+                                </Grid.RowDefinitions>
+                                <Ellipse Grid.Column="1" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact1, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL1, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="3" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact3, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL3, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="5" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact5, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL5, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="7" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact7, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL7, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="9" Grid.Row="1" Width="47" Height="47" Fill="{Binding Contact9, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL9, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="2" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact2, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL2, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="4" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact4, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL4, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="6" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact6, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL6, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="8" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact8, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL8, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+                                <Ellipse Grid.Column="10" Grid.Row="3" Width="47" Height="47" Fill="{Binding Contact10, Converter={conv:ColorConverters}}" Stroke="{Binding ContactL10, Converter={conv:ColorConverterMemory}}" StrokeThickness="10"/>
+
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </Grid>
+
+
+
+        <Grid ShowGridLines="False" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+                <ColumnDefinition Width="10*"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Text="Позиция" Grid.Row="0" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16"/>
+            <TextBlock Text="Модификация" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16"/>
+            <TextBlock Text="Номер" Grid.Row="0" Grid.Column="3" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Arial" FontSize="16"/>
+            <TextBox Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Text="{Binding Nomer}"  Width="120" Height="22" IsReadOnly="True"/>
+
+            <TextBox Height="20" Width="100" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="1" Text="П-01" IsReadOnly="True"/>
+            <TextBox Height="20" Width="100" Grid.Row="1" HorizontalAlignment="Center" Grid.Column="2" Text="Ш4" IsReadOnly="True"/>
+
+
+
+            <Button Grid.Row="1" Grid.Column="4" Height="22" Width="100" Content="Сброс модуля" Command="{Binding ModulReset}"/>
+            <Button Grid.Row="1" Grid.Column="5" Height="22" Width="136" Content="Завершить прозвонку" Command="{Binding StopCommand}"/>
+
+        </Grid>
+    </Grid>
+</Window>

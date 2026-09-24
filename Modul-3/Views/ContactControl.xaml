@@ -5,8 +5,7 @@
              Height="{Binding Diameter}">
     <Grid>
         <Ellipse x:Name="MarkerEllipse"
-                 Fill="Green"
-                 Stroke="White"
+                 
                  StrokeThickness="2"
                  Cursor="Arrow">
             <Ellipse.Style>
@@ -16,22 +15,17 @@
                     <Setter Property="StrokeThickness" Value="2"/>
                     <Setter Property="Opacity" Value="0.8"/>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
-                            <Setter Property="Fill" Value="#FFFF9800"/>
-                            <Setter Property="Stroke" Value="Red"/>
-                            <Setter Property="StrokeThickness" Value="3"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding IsActive}" Value="True">
-                            <Setter Property="Fill" Value="#FFF44336"/>
-                            <Setter Property="Stroke" Value="Yellow"/>
-                            <Setter Property="StrokeThickness" Value="3"/>
-                            <Setter Property="Opacity" Value="1.0"/>
+                            <DataTrigger Binding="{Binding IsActive}" Value="True">
+                            <Setter Property="Fill" Value="Red"/>
+                            <Setter Property="Stroke" Value="White"/>
+                            <Setter Property="StrokeThickness" Value="2"/>
+                            <Setter Property="Opacity" Value="0.8"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
             </Ellipse.Style>
         </Ellipse>
-
+        
         <!--  <TextBlock Text="{Binding ContactNumber}" 
                    Foreground="White" 
                    FontWeight="Bold"

@@ -1,51 +1,58 @@
-﻿
-using Modul_3.Models;
+﻿using Modul_3.Models;
+using Modul_3.Services;
 using Modul_3.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Windows;
 using System.Windows.Controls;
-using System.Collections.Specialized;
-using System.Windows.Media;
 
 namespace Modul_3.Views
 {
-    public partial class  ControlWindow : Window
+
+    public partial class ControlWindow : Window
     {
         private ControlViewModel ViewModel => (ControlViewModel)DataContext;
-        private Dictionary<ContactMarker, ContactControl> _markerControls = new Dictionary<ContactMarker, ContactControl>();
+        private Dictionary<ContactMarker, MemorySegmentControl> _markerControls = new Dictionary<ContactMarker, MemorySegmentControl>();
 
         // Фиксированные размеры изображения
         private const double ImageWidth = 800;
         private const double ImageHeight = 600;
 
-        public ControlWindow(Product product)
+        public ControlWindow(Product product, string productNumber, string operatorName,
+                     ArduinoService arduinoService, TestProgress savedProgress = null)
         {
             InitializeComponent();
 
-            var viewModel = new ControlViewModel();
-            viewModel.CurrentProduct = product;
+            var viewModel = new ControlViewModel(product, productNumber, operatorName,
+                                  arduinoService, savedProgress);
             DataContext = viewModel;
 
-            // Устанавливаем фиксированный размер изображения в ViewModel
             viewModel.ImageSize = new Size(ImageWidth, ImageHeight);
 
             viewModel.PropertyChanged += ViewModel_PropertyChanged;
             viewModel.Markers.CollectionChanged += Markers_CollectionChanged;
-            Dispatcher.BeginInvoke(new Action(() => UpdateMarkers()), System.Windows.Threading.DispatcherPriority.Loaded);
+
+            // Убедимся, что маркеры обновляются при загрузке окна
+            Loaded += ControlWindow_Loaded;
+        }
+
+        private void ControlWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Принудительно обновляем маркеры после загрузки окна
+            UpdateMarkers();
         }
 
         private void ViewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            
             if (e.PropertyName == nameof(ControlViewModel.SelectedConnector))
             {
                 UpdateMarkers();
             }
         }
+
         private void Markers_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            System.Diagnostics.Debug.WriteLine($"CollectionChanged: {e.Action}");
             UpdateMarkers();
         }
 
@@ -53,25 +60,28 @@ namespace Modul_3.Views
         {
             try
             {
-                
                 MarkersCanvas.Children.Clear();
                 _markerControls.Clear();
 
-                // Добавляем новые маркеры
+                if (ViewModel?.Markers == null) return;
+
                 foreach (var marker in ViewModel.Markers)
                 {
-                    var markerControl = new ContactControl();
+                    var markerControl = new MemorySegmentControl();
+
+                    // Привязки свойств
+                    markerControl.SetBinding(MemorySegmentControl.IsActiveProperty, "IsActive");
+                    markerControl.SetBinding(MemorySegmentControl.ActivatedSegmentsProperty, "ActivatedSegments");
+                    markerControl.SetBinding(MemorySegmentControl.TotalSegmentsProperty, "TotalSegments");
+                    markerControl.SetBinding(MemorySegmentControl.DiameterProperty, "Diameter");
+
                     markerControl.DataContext = marker;
 
-                    // Устанавливаем позицию на основе относительных координат
                     UpdateMarkerPosition(marker, markerControl);
 
                     MarkersCanvas.Children.Add(markerControl);
                     _markerControls[marker] = markerControl;
-
                 }
-
-                
             }
             catch (Exception ex)
             {
@@ -79,19 +89,20 @@ namespace Modul_3.Views
             }
         }
 
-        private void UpdateMarkerPosition(ContactMarker marker, ContactControl control)
+        private void UpdateMarkerPosition(ContactMarker marker, MemorySegmentControl control)
         {
-            // Вычисляем абсолютные координаты на основе относительных и фиксированного размера изображения
-            double absoluteX = (marker.RelativeX * ImageWidth) - (control.Width / 2);
-            double absoluteY = (marker.RelativeY * ImageHeight) - (control.Height / 2);
+            if (marker == null || control == null) return;
+
+            // Используем диаметр из маркера для позиционирования
+            double absoluteX = (marker.RelativeX * ImageWidth) - (marker.Diameter / 2);
+            double absoluteY = (marker.RelativeY * ImageHeight) - (marker.Diameter / 2);
 
             // Ограничиваем в пределах Canvas
-            absoluteX = Math.Max(0, Math.Min(ImageWidth - control.Width, absoluteX));
-            absoluteY = Math.Max(0, Math.Min(ImageHeight - control.Height, absoluteY));
+            absoluteX = Math.Max(0, Math.Min(ImageWidth - marker.Diameter, absoluteX));
+            absoluteY = Math.Max(0, Math.Min(ImageHeight - marker.Diameter, absoluteY));
 
             Canvas.SetLeft(control, absoluteX);
             Canvas.SetTop(control, absoluteY);
-                        
         }
 
         protected override void OnClosed(EventArgs e)
@@ -99,9 +110,11 @@ namespace Modul_3.Views
             if (ViewModel != null)
             {
                 ViewModel.PropertyChanged -= ViewModel_PropertyChanged;
+                ViewModel.Markers.CollectionChanged -= Markers_CollectionChanged;
+                ViewModel.Dispose();
             }
-
             base.OnClosed(e);
         }
     }
+
 }

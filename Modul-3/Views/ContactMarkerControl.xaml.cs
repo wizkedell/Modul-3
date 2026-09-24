@@ -135,6 +135,7 @@ namespace Modul_3.Views
 
                 if (DataContext is ContactMarker marker)
                 {
+                    marker.IsSelected = false;
                     System.Diagnostics.Debug.WriteLine($"Перетаскивание завершено. Финальная позиция: ({marker.RelativeX}, {marker.RelativeY})");
                 }
             }
@@ -145,6 +146,7 @@ namespace Modul_3.Views
                 ResizeHandle.ReleaseMouseCapture();
                 e.Handled = true;
             }
+
         }
 
         private void OnMouseWheel(object sender, MouseWheelEventArgs e)

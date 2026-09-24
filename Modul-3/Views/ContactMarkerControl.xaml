@@ -5,8 +5,7 @@
              Height="{Binding Diameter}">
     <Grid>
         <Ellipse x:Name="MarkerEllipse"
-                 Fill="#FF4CAF50"
-                 Stroke="White"
+                 
                  StrokeThickness="2"
                  Cursor="Hand">
             <Ellipse.Style>
@@ -20,7 +19,7 @@
                             <Setter Property="Fill" Value="#FFFF9800"/>
                             <Setter Property="Stroke" Value="Red"/>
                             <Setter Property="StrokeThickness" Value="3"/>
-                            <Setter Property="Opacity" Value="1.0"/>
+                            <Setter Property="Opacity" Value="0.8"/>
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
